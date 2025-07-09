@@ -4,7 +4,7 @@
   "description": "Generate Express TypeScript modules with templates",
   "main": "index.js",
   "bin": {
-    "generate-module": "bin/generate-module.js"
+    "generate-module": "bin/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
