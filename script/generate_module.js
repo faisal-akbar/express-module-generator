@@ -59,6 +59,8 @@ function copyAndReplaceTemplate(
   const pascal = toPascalCase(folderName);
   const folderPath = path.join(__dirname, 'src', 'app', 'modules', folderName);
 
+  console.log(`📁 Creating module in: ${folderPath}`);
+
   // Create the directory recursively in case src/app/modules doesn't exist
   fs.mkdirSync(folderPath, { recursive: true });
 
@@ -85,56 +87,56 @@ function copyAndReplaceTemplate(
     process.exit(0);
   }
 
-  const templates = {
-    interface: `export interface I${pascal} {
-  // fields here
-}
-`,
-    controller: `/* eslint-disable @typescript-eslint/no-unused-vars */
+//   const templates = {
+//     interface: `export interface I${pascal} {
+//   // fields here
+// }
+// `,
+//     controller: `/* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { NextFunction, Request, Response } from "express";
-import httpStatus from "http-status-codes";
-import { catchAsync } from "../../utils/catchAsync";
-import { sendResponse } from "../../utils/sendResponse";
-import { ${pascal}Service } from "./${folderName}.service";
+// import { NextFunction, Request, Response } from "express";
+// import httpStatus from "http-status-codes";
+// import { catchAsync } from "../../utils/catchAsync";
+// import { sendResponse } from "../../utils/sendResponse";
+// import { ${pascal}Service } from "./${folderName}.service";
 
 
-export const ${folderName}Controllers = {
-    // Example controller method
-}
-`,
-    model: `import { model, Schema } from "mongoose";
-import { I${pascal} } from "./${folderName}.interface";
+// export const ${folderName}Controllers = {
+//     // Example controller method
+// }
+// `,
+//     model: `import { model, Schema } from "mongoose";
+// import { I${pascal} } from "./${folderName}.interface";
 
-const ${folderName}Schema = new Schema<I${pascal}>({
-  // Define schema fields here
-}, {
-    timestamps: true,
-    versionKey: false
-});
+// const ${folderName}Schema = new Schema<I${pascal}>({
+//   // Define schema fields here
+// }, {
+//     timestamps: true,
+//     versionKey: false
+// });
 
-export const ${folderName}Model = model<I${pascal}>("${folderName}", ${folderName}Schema);
-`,
-    routes: `import { Router } from "express";
-import { ${pascal}Controllers } from "./${folderName}.controller";
+// export const ${folderName}Model = model<I${pascal}>("${folderName}", ${folderName}Schema);
+// `,
+//     routes: `import { Router } from "express";
+// import { ${pascal}Controllers } from "./${folderName}.controller";
 
-const router = Router();
+// const router = Router();
 
-// Example route
-// router.get("/", ${pascal}Controllers.exampleMethod);
+// // Example route
+// // router.get("/", ${pascal}Controllers.exampleMethod);
 
-export const ${folderName}Routes = router;
-`,
-    service: `import { I${pascal} } from "./${folderName}.interface";
-import { ${pascal} } from "./${folderName}.model";
+// export const ${folderName}Routes = router;
+// `,
+//     service: `import { I${pascal} } from "./${folderName}.interface";
+// import { ${pascal} } from "./${folderName}.model";
 
-// service methods
+// // service methods
 
-export const ${folderName}Service = {
-  // Example service method
-}
-`,
-    };
+// export const ${folderName}Service = {
+//   // Example service method
+// }
+// `,
+//     };
 
 //  filesToActuallyCreate.forEach((type) => {
 //     const filename = `${folderName}.${type}.ts`;
