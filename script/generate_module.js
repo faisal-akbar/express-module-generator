@@ -99,11 +99,13 @@ function copyAndReplaceTemplate(type, destDir, name, fileName) {
     if (withTemplate) {
       copyAndReplaceTemplate(type, folderPath, pascal, folderName);
     } else {
-      fs.writeFileSync(filepath, `// ${filename}`);
+      fs.writeFileSync(filepath, ``);
     }
   }
 
   console.log(
-    `✅ Created ${filesToActuallyCreate.length} new files in ${folderName} module: ${filesToActuallyCreate.join(", ")}`
+    `✅ Created ${filesToActuallyCreate.length} new files in ${folderName} module: ${filesToActuallyCreate.map(
+      (type) => `${folderName}.${type}.ts`
+    ).join(", ")}`
   );
 })();
