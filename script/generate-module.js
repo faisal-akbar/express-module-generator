@@ -4,6 +4,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import inquirer from "inquirer";
+import { consola } from "consola";
 
 // Get __dirname equivalent for ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -34,13 +35,13 @@ function copyAndReplaceTemplate(type, destDir, name, fileName) {
     {
       name: "folderName",
       type: "input",
-      message: "Enter module name (folder name):",
-      validate: (input) => input.trim() !== "" || "Folder name is required",
+      message: "📁 Enter module name (folder name):",
+      validate: (input) => input.trim() !== "" || "Module name is required",
     },
     {
       name: "filesToCreate",
       type: "checkbox",
-      message: "Which files do you want to generate?",
+      message: "📄 Which files do you want to generate?",
       choices: ["controller", "interface", "model", "routes", "service"],
       validate: (choices) =>
         choices.length > 0 || "You must choose at least one file",
@@ -48,7 +49,7 @@ function copyAndReplaceTemplate(type, destDir, name, fileName) {
     {
       name: "withTemplate",
       type: "confirm",
-      message: "Include boilerplate template?",
+      message: "📝 Include boilerplate template?",
       default: true,
     },
   ]);
@@ -62,7 +63,7 @@ function copyAndReplaceTemplate(type, destDir, name, fileName) {
     folderName
   );
 
-  console.log(`📁 Creating module in: ${folderPath}`);
+  consola.start(`📁 Creating module in: ${folderPath}`);
 
   // Create the directory recursively in case src/app/modules doesn't exist
   fs.mkdirSync(folderPath, { recursive: true });
@@ -82,13 +83,13 @@ function copyAndReplaceTemplate(type, destDir, name, fileName) {
   });
 
   if (existingFiles.length > 0) {
-    console.log(
-      `⚠️  Skipping existing files: ${existingFiles.map((type) => `${folderName}.${type}.ts`).join(", ")}`
+    consola.warn(
+      `Skipping existing files: ${existingFiles.map((type) => `${folderName}.${type}.ts`).join(", ")}`
     );
   }
 
   if (filesToActuallyCreate.length === 0) {
-    console.log(`✅ All selected files already exist in ${folderName} module`);
+    consola.info(`All selected files already exist in ${folderName} module`);
     process.exit(0);
   }
 
@@ -103,8 +104,8 @@ function copyAndReplaceTemplate(type, destDir, name, fileName) {
     }
   }
 
-  console.log(
-    `✅ Created ${filesToActuallyCreate.length} new files in ${folderName} module: ${filesToActuallyCreate.map(
+  consola.success(
+    `🚀 Created ${filesToActuallyCreate.length} new files in ${folderName} module: ${filesToActuallyCreate.map(
       (type) => `${folderName}.${type}.ts`
     ).join(", ")}`
   );
