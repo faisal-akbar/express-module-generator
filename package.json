@@ -1,6 +1,6 @@
 {
-  "name": "express-module-generator",
-  "version": "1.1.0",
+  "name": "make-express-module",
+  "version": "1.0.2",
   "description": "Generate Express TypeScript modules with templates",
   "main": "index.js",
   "bin": {

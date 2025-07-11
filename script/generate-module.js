@@ -42,7 +42,7 @@ function copyAndReplaceTemplate(type, destDir, name, fileName) {
       name: "filesToCreate",
       type: "checkbox",
       message: "📄 Which files do you want to generate?",
-      choices: ["controller", "interface", "model", "routes", "service"],
+      choices: ["controller", "interface", "model", "routes", "service", "validation"],
       validate: (choices) =>
         choices.length > 0 || "You must choose at least one file",
     },
