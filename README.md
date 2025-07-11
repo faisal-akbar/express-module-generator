@@ -6,7 +6,7 @@ Generate Express TypeScript modules with boilerplate templates.
 cd to your express project directory root and run:
 
 ```bash
-npx make-express-module
+npx generate-module
 npx github:faisal-akbar/express-module-generator
 
 ```
